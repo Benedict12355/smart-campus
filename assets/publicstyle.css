@@ -1,0 +1,93 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
+    margin: 0;
+    padding: 30px;
+}
+
+h1 {
+    text-align: center;
+}
+
+form {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+form input {
+    padding: 10px;
+    width: 280px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+form button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background: #0b3d91;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.toolbar {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.toolbar a {
+    margin: 0 10px;
+    color: #0b3d91;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 18px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    border-left: 8px solid #999;
+}
+
+.card h2 {
+    margin: 0 0 4px;
+    font-size: 1.2rem;
+}
+
+.card .meta {
+    color: #666;
+    font-size: 0.9rem;
+    margin: 0 0 10px;
+}
+
+.card .status-badge {
+    font-weight: bold;
+    margin: 0 0 6px;
+}
+
+.card .location {
+    font-size: 0.9rem;
+    color: #444;
+}
+
+.status-available { border-left-color: #2e9e44; }
+.status-available .status-badge { color: #2e9e44; }
+
+.status-busy { border-left-color: #d9822b; }
+.status-busy .status-badge { color: #d9822b; }
+
+.status-away { border-left-color: #888; }
+.status-away .status-badge { color: #888; }

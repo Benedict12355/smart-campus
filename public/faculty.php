@@ -11,6 +11,17 @@ function statusLabel($status) {
     ];
     return $labels[$status] ?? "No status set";
 }
+function statusClass($status) {
+    $classes = [
+        "available" => "status-available",
+        "consultation_hours" => "status-available",
+        "in_class" => "status-busy",
+        "busy" => "status-busy",
+        "in_meeting" => "status-busy",
+        "out_of_campus" => "status-away",
+    ];
+    return $classes[$status] ?? "status-away";
+}
 
 
 $search = $_GET["search"] ?? "";
@@ -39,7 +50,7 @@ $people = $stmt->fetchAll();
 <head>
 <meta charset="UTF-8">
 <title>Faculty & Staff Availability</title>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="../assets/publicstyle.css">
 </head>
 <body>
 <h1>Faculty & Staff Availability</h1>
@@ -48,28 +59,27 @@ $people = $stmt->fetchAll();
         value="<?= htmlspecialchars($search) ?>">
     <button type="submit">Search</button>
 </form>
-<table>
-<tr>
-    <th><a href="?sort=id">ID</a></th>
-    <th><a href="?sort=full_name">Name</a></th>
-    <th><a href="?sort=department">Department</a></th>
-    <th><a href="?sort=role_title">Role</a></th>
-    <th><a href="?sort=status">Status</a></th>
-    <th>Location</th>
-</tr>
+<div class="toolbar">
+    <a href="?sort=full_name">Sort by Name</a>
+    <a href="?sort=department">Sort by Department</a>
+    <a href="?sort=status">Sort by Status</a>
+</div>
+
+<div class="card-grid">
 <?php foreach ($people as $person): ?>
-<tr>
-    <td><?= $person["id"] ?></td>
-    <td><?= htmlspecialchars($person["full_name"]) ?></td>
-    <td><?= htmlspecialchars($person["department"]) ?></td>
-    <td><?= htmlspecialchars($person["role_title"]) ?></td>
-    <td><?= statusLabel($person["status"]) ?></td>
-    <td><?= htmlspecialchars($person["location"] ?? "-") ?></td>
-</tr>
+    <div class="card <?= statusClass($person["status"]) ?>">
+        <h2><?= htmlspecialchars($person["full_name"]) ?></h2>
+        <p class="meta"><?= htmlspecialchars($person["role_title"]) ?> &middot; <?= htmlspecialchars($person["department"]) ?></p>
+        <p class="status-badge"><?= statusLabel($person["status"]) ?></p>
+        <?php if ($person["location"]): ?>
+            <p class="location">📍 <?= htmlspecialchars($person["location"]) ?></p>
+        <?php endif; ?>
+    </div>
 <?php endforeach; ?>
+
 <?php if (empty($people)): ?>
-<tr><td colspan="6">No faculty or staff found.</td></tr>
+    <p>No faculty or staff found.</p>
 <?php endif; ?>
-</table>
+</div>
 </body>
 </html>
