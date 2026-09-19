@@ -1,0 +1,1192 @@
+:root {
+    --neon-green: #00ff88;
+    --neon-blue: #0099ff;
+    --neon-pink: #ff0080;
+
+    --bg-dark: #080a0f;
+    --card-bg: #11141c;
+    --input-bg: #171b25;
+
+    --border-dark: #292f3a;
+    --text-white: #ffffff;
+    --text-light: #a0a8b8;
+    --text-muted: #707887;
+
+    --shadow-dark: rgba(0, 0, 0, 0.5);
+    --green-glow: rgba(0, 255, 136, 0.25);
+    --blue-glow: rgba(0, 153, 255, 0.2);
+}
+
+
+/* ==============================
+   RESET
+============================== */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+/* ==============================
+   BODY
+============================== */
+
+body {
+    font-family: 'Poppins', 'Segoe UI', sans-serif;
+
+    background:
+        radial-gradient(
+            circle at 20% 20%,
+            rgba(0, 255, 136, 0.05),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 80% 80%,
+            rgba(0, 153, 255, 0.05),
+            transparent 35%
+        ),
+        var(--bg-dark);
+
+    color: var(--text-white);
+
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 2rem 1rem;
+
+    overflow-x: hidden;
+}
+
+
+/* ==============================
+   MAIN CARD
+============================== */
+
+.colorlib-card {
+    background: rgba(17, 20, 28, 0.94);
+
+    width: 100%;
+    max-width: 900px;
+
+    border-radius: 18px;
+
+    border: 1px solid var(--border-dark);
+
+    box-shadow:
+        0 20px 50px var(--shadow-dark),
+        0 0 0 1px rgba(255, 255, 255, 0.02);
+
+    overflow: hidden;
+
+    position: relative;
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    transition:
+        all 0.3s ease;
+}
+
+
+/* Neon top line */
+
+.colorlib-card::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 10%;
+    right: 10%;
+
+    height: 2px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            var(--neon-green),
+            var(--neon-blue),
+            transparent
+        );
+
+    box-shadow:
+        0 0 10px var(--neon-green),
+        0 0 20px var(--neon-blue);
+
+    opacity: 0.7;
+}
+
+
+/* Card hover */
+
+.colorlib-card:hover {
+    border-color: rgba(0, 255, 136, 0.25);
+
+    box-shadow:
+        0 25px 60px rgba(0, 0, 0, 0.6),
+        0 0 30px rgba(0, 255, 136, 0.08);
+}
+
+
+/* ==============================
+   VIEW PANEL
+============================== */
+
+.view-panel {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    width: 100%;
+
+    min-height: 560px;
+
+    transition:
+        opacity 0.4s ease,
+        transform 0.4s ease;
+}
+
+
+.view-panel.hidden-panel {
+    display: none !important;
+
+    opacity: 0;
+
+    transform: scale(0.98);
+}
+
+
+.view-panel.active-panel {
+    display: grid !important;
+
+    opacity: 1;
+
+    transform: scale(1);
+
+    animation:
+        fadeInScale 0.4s
+        cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+
+@keyframes fadeInScale {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(10px)
+            scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+
+/* ==============================
+   FORM COLUMN
+============================== */
+
+.form-column {
+    padding: 60px 50px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+}
+
+
+/* ==============================
+   ILLUSTRATION COLUMN
+============================== */
+
+.illustration-column {
+    padding: 40px;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(0, 255, 136, 0.035),
+            transparent 60%
+        );
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    position: relative;
+
+    border-left: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+
+/* ==============================
+   EMPTY IMAGE
+============================== */
+
+.image-container {
+    width: 100%;
+
+    max-width: 320px;
+
+    height: 280px;
+
+    margin-bottom: 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+
+.image-container img {
+    width: 100%;
+
+    max-width: 320px;
+
+    height: 280px;
+
+    object-fit: contain;
+}
+
+
+/* ==============================
+   FORM TITLE
+============================== */
+
+.form-title {
+    font-size: 32px;
+
+    font-weight: 700;
+
+    color: var(--text-white);
+
+    margin-bottom: 35px;
+
+    line-height: 1.2;
+
+    text-shadow:
+        0 0 15px rgba(0, 255, 136, 0.15);
+}
+
+
+/* ==============================
+   INPUT GROUP
+============================== */
+
+.input-group {
+    position: relative;
+
+    margin-bottom: 28px;
+
+    border-bottom:
+        1px solid var(--border-dark);
+
+    display: flex;
+
+    align-items: center;
+
+    padding-bottom: 8px;
+
+    transition:
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+
+.input-group:focus-within {
+    border-bottom-color:
+        var(--neon-green);
+
+    box-shadow:
+        0 2px 10px
+        rgba(0, 255, 136, 0.12);
+}
+
+
+.input-group.error {
+    border-bottom-color:
+        var(--neon-pink) !important;
+
+    box-shadow:
+        0 2px 10px
+        rgba(255, 0, 128, 0.2);
+}
+
+
+/* ==============================
+   INPUT ICON
+============================== */
+
+.input-icon {
+    color: var(--text-light);
+
+    font-size: 14px;
+
+    width: 24px;
+
+    text-align: center;
+
+    margin-right: 12px;
+
+    transition:
+        color 0.3s ease,
+        text-shadow 0.3s ease;
+}
+
+
+.input-group:focus-within .input-icon {
+    color: var(--neon-green);
+
+    text-shadow:
+        0 0 10px
+        rgba(0, 255, 136, 0.7);
+}
+
+
+/* ==============================
+   INPUT
+============================== */
+
+.custom-input {
+    width: 100%;
+
+    border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    font-family: 'Poppins', sans-serif;
+
+    font-size: 13.5px;
+
+    color: var(--text-white);
+
+    font-weight: 400;
+}
+
+
+.custom-input::placeholder {
+    color: var(--text-muted);
+
+    font-weight: 400;
+}
+
+
+.custom-input:focus {
+    text-shadow:
+        0 0 8px
+        rgba(255, 255, 255, 0.15);
+}
+
+
+/* ==============================
+   ERROR TEXT
+============================== */
+
+.error-text {
+    position: absolute;
+
+    bottom: -18px;
+
+    left: 36px;
+
+    font-size: 11px;
+
+    color: var(--neon-pink);
+
+    font-weight: 500;
+
+    display: none;
+
+    text-shadow:
+        0 0 8px
+        rgba(255, 0, 128, 0.5);
+}
+
+
+.input-group.error .error-text {
+    display: block;
+}
+
+
+/* ==============================
+   CHECKBOX
+============================== */
+
+.checkbox-container {
+    display: flex;
+
+    align-items: center;
+
+    position: relative;
+
+    padding-left: 28px;
+
+    margin-top: 10px;
+
+    margin-bottom: 30px;
+
+    cursor: pointer;
+
+    font-size: 13px;
+
+    color: var(--text-light);
+
+    user-select: none;
+
+    line-height: 1.4;
+}
+
+
+.checkbox-container input {
+    position: absolute;
+
+    opacity: 0;
+
+    cursor: pointer;
+
+    height: 0;
+
+    width: 0;
+}
+
+
+.checkmark {
+    position: absolute;
+
+    top: 1px;
+
+    left: 0;
+
+    height: 18px;
+
+    width: 18px;
+
+    background-color:
+        var(--input-bg);
+
+    border:
+        1px solid var(--border-dark);
+
+    border-radius: 4px;
+
+    transition:
+        all 0.2s ease;
+}
+
+
+.checkbox-container:hover .checkmark {
+    border-color:
+        var(--neon-green);
+
+    box-shadow:
+        0 0 10px
+        rgba(0, 255, 136, 0.2);
+}
+
+
+.checkbox-container input:checked ~ .checkmark {
+    background:
+        var(--neon-green);
+
+    border-color:
+        var(--neon-green);
+
+    box-shadow:
+        0 0 12px
+        rgba(0, 255, 136, 0.45);
+}
+
+
+.checkmark:after {
+    content: "";
+
+    position: absolute;
+
+    display: none;
+
+    left: 6px;
+
+    top: 2px;
+
+    width: 5px;
+
+    height: 10px;
+
+    border:
+        solid #080a0f;
+
+    border-width:
+        0 2px 2px 0;
+
+    transform:
+        rotate(45deg);
+}
+
+
+.checkbox-container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+
+/* ==============================
+   TERMS
+============================== */
+
+.terms-link {
+    margin-left: 4px;
+
+    text-decoration: underline;
+
+    color: var(--neon-green);
+
+    transition:
+        all 0.2s ease;
+}
+
+
+.terms-link:hover {
+    color: var(--neon-blue);
+
+    text-shadow:
+        0 0 10px
+        rgba(0, 153, 255, 0.6);
+}
+
+
+/* ==============================
+   BUTTON
+============================== */
+
+.btn-submit {
+    background:
+        linear-gradient(
+            135deg,
+            var(--neon-green),
+            var(--neon-blue)
+        );
+
+    color: #080a0f;
+
+    border: none;
+
+    border-radius: 6px;
+
+    padding: 12px 34px;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    font-family: 'Poppins', sans-serif;
+
+    cursor: pointer;
+
+    transition:
+        all 0.3s ease;
+
+    box-shadow:
+        0 5px 20px
+        rgba(0, 255, 136, 0.2);
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    align-self: flex-start;
+}
+
+
+.btn-submit:hover {
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 8px 25px
+        rgba(0, 255, 136, 0.35),
+
+        0 0 30px
+        rgba(0, 153, 255, 0.2);
+}
+
+
+.btn-submit:active {
+    transform:
+        translateY(0);
+}
+
+
+.btn-submit:disabled {
+    opacity: 0.7;
+
+    cursor: not-allowed;
+
+    transform: none;
+}
+
+
+/* ==============================
+   SWITCH LINK
+============================== */
+
+.switch-link {
+    margin-top: 25px;
+
+    color: var(--text-light);
+
+    font-size: 14px;
+
+    text-decoration: underline;
+
+    font-weight: 400;
+
+    cursor: pointer;
+
+    transition:
+        all 0.2s ease;
+
+    display: inline-block;
+}
+
+
+.switch-link:hover {
+    color: var(--neon-green);
+
+    text-shadow:
+        0 0 10px
+        rgba(0, 255, 136, 0.5);
+}
+
+
+/* ==============================
+   SOCIAL LOGIN
+============================== */
+
+.social-login-wrapper {
+    margin-top: 45px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+
+.social-title {
+    font-size: 14px;
+
+    color: var(--text-light);
+
+    font-weight: 400;
+
+    margin-right: 4px;
+}
+
+
+.social-btn {
+    width: 36px;
+
+    height: 36px;
+
+    border-radius: 6px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: #ffffff;
+
+    font-size: 15px;
+
+    text-decoration: none;
+
+    transition:
+        all 0.2s ease;
+
+    border:
+        1px solid var(--border-dark);
+
+    cursor: pointer;
+}
+
+
+.social-btn.facebook {
+    background:
+        rgba(59, 89, 152, 0.25);
+}
+
+
+.social-btn.twitter {
+    background:
+        rgba(29, 161, 242, 0.25);
+}
+
+
+.social-btn.google {
+    background:
+        rgba(234, 67, 53, 0.25);
+}
+
+
+.social-btn:hover {
+    transform:
+        translateY(-2px);
+
+    border-color:
+        var(--neon-green);
+
+    box-shadow:
+        0 0 15px
+        rgba(0, 255, 136, 0.25);
+}
+
+
+/* ==============================
+   TOAST
+============================== */
+
+.toast {
+    position: fixed;
+
+    bottom: 30px;
+
+    right: 30px;
+
+    background:
+        #11141c;
+
+    border:
+        1px solid var(--border-dark);
+
+    border-left:
+        4px solid var(--neon-green);
+
+    padding: 16px 24px;
+
+    border-radius: 8px;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.5),
+        0 0 20px rgba(0, 255, 136, 0.08);
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    z-index: 100;
+
+    transform:
+        translateY(100px);
+
+    opacity: 0;
+
+    transition:
+        all 0.3s
+        cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+
+.toast.show {
+    transform:
+        translateY(0);
+
+    opacity: 1;
+}
+
+
+/* ==============================
+   MODAL
+============================== */
+
+.modal-overlay {
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        rgba(0, 0, 0, 0.75);
+
+    backdrop-filter:
+        blur(8px);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    z-index: 200;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition:
+        opacity 0.3s ease;
+
+    padding: 1rem;
+}
+
+
+.modal-overlay.active {
+    opacity: 1;
+
+    pointer-events: auto;
+}
+
+
+.modal-card {
+    background:
+        #11141c;
+
+    border:
+        1px solid
+        rgba(0, 255, 136, 0.25);
+
+    border-radius: 12px;
+
+    max-width: 500px;
+
+    width: 100%;
+
+    padding: 30px;
+
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.6),
+        0 0 30px rgba(0, 255, 136, 0.08);
+
+    transform:
+        translateY(20px);
+
+    transition:
+        transform 0.3s ease;
+}
+
+
+.modal-overlay.active .modal-card {
+    transform:
+        translateY(0);
+}
+
+
+/* Modal text */
+
+.modal-card h3 {
+    color: var(--text-white) !important;
+}
+
+
+.modal-card p {
+    color: var(--text-light) !important;
+}
+
+
+/* ==============================
+   BACKGROUND NEON ORBS
+============================== */
+
+.background-effects {
+    position: fixed;
+
+    top: 0;
+
+    left: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    pointer-events: none;
+
+    z-index: -1;
+}
+
+
+.glow-orb {
+    position: absolute;
+
+    border-radius: 50%;
+
+    filter: blur(2px);
+
+    animation:
+        float 6s ease-in-out infinite;
+}
+
+
+.glow-orb-1 {
+    width: 350px;
+
+    height: 350px;
+
+    top: 5%;
+
+    left: -10%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(0, 255, 136, 0.12),
+            transparent 70%
+        );
+}
+
+
+.glow-orb-2 {
+    width: 300px;
+
+    height: 300px;
+
+    right: -8%;
+
+    bottom: 5%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(0, 153, 255, 0.12),
+            transparent 70%
+        );
+
+    animation-delay:
+        -2s;
+}
+
+
+.glow-orb-3 {
+    width: 200px;
+
+    height: 200px;
+
+    left: 25%;
+
+    bottom: -5%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255, 0, 128, 0.07),
+            transparent 70%
+        );
+
+    animation-delay:
+        -4s;
+}
+
+
+/* ==============================
+   ANIMATION
+============================== */
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform:
+            translateY(0)
+            translateX(0);
+    }
+
+    33% {
+        transform:
+            translateY(-20px)
+            translateX(10px);
+    }
+
+    66% {
+        transform:
+            translateY(10px)
+            translateX(-10px);
+    }
+}
+
+
+/* ==============================
+   RESPONSIVE
+============================== */
+
+@media (max-width: 768px) {
+
+    body {
+        padding: 1rem;
+    }
+
+
+    .colorlib-card {
+        max-width: 480px;
+
+        border-radius: 16px;
+    }
+
+
+    .view-panel {
+        grid-template-columns: 1fr;
+    }
+
+
+    #signupView {
+        display: flex;
+
+        flex-direction: column;
+    }
+
+
+    #signinView {
+        display: flex;
+
+        flex-direction: column-reverse;
+    }
+
+
+    .form-column {
+        padding: 40px 30px;
+    }
+
+
+    .illustration-column {
+        padding: 30px;
+
+        border-top:
+            1px solid
+            rgba(255, 255, 255, 0.05);
+
+        border-left: none;
+    }
+
+
+    .image-container {
+        max-width: 240px;
+
+        height: 200px;
+    }
+
+
+    .image-container img {
+        max-width: 240px;
+
+        height: 200px;
+    }
+
+
+    .form-title {
+        font-size: 26px;
+
+        margin-bottom: 25px;
+    }
+
+
+    .social-login-wrapper {
+        margin-top: 30px;
+    }
+}
+
+
+/* ==============================
+   SMALL MOBILE
+============================== */
+
+@media (max-width: 480px) {
+
+    body {
+        padding: 10px;
+    }
+
+
+    .colorlib-card {
+        border-radius: 14px;
+    }
+
+
+    .form-column {
+        padding: 35px 25px;
+    }
+
+
+    .illustration-column {
+        padding: 25px;
+    }
+
+
+    .form-title {
+        font-size: 25px;
+    }
+
+
+    .toast {
+        left: 20px;
+
+        right: 20px;
+
+        bottom: 20px;
+    }
+}
+
+
+/* ==============================
+   ACCESSIBILITY
+============================== */
+
+:focus-visible {
+    outline:
+        2px solid
+        var(--neon-green);
+
+    outline-offset: 3px;
+
+    box-shadow:
+        0 0 12px
+        rgba(0, 255, 136, 0.3);
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration:
+            0.01ms !important;
+
+        animation-iteration-count:
+            1 !important;
+
+        transition-duration:
+            0.01ms !important;
+
+        scroll-behavior:
+            auto !important;
+    }
+}

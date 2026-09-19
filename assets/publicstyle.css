@@ -153,3 +153,15 @@ body {
     }
 }
 
+.status-none {
+    border-color: #6b728055;
+}
+.status-none .status-icon {
+    background: #2a2d38;
+    box-shadow: 0 0 10px rgba(107, 114, 128, 0.4);
+}
+.status-none .badge {
+    background: #6b7280 !important;
+    color: #f4f4f5 !important;
+    box-shadow: 0 0 8px rgba(107, 114, 128, 0.5);
+}

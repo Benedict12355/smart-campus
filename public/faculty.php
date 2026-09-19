@@ -12,8 +12,8 @@ function statusLabel($status)
     ];
     return $labels[$status] ?? "No status set";
 }
-function statusClass($status)
-{
+function statusClass($status) {
+    if ($status === null) return "status-none";
     $classes = [
         "available" => "status-available",
         "consultation_hours" => "status-available",
@@ -36,8 +36,8 @@ function statusBadgeClass($status)
     ];
     return $classes[$status] ?? "bg-secondary";
 }
-function statusIconPath($status)
-{
+function statusIconPath($status) {
+    if ($status === null) return "../assets/image/no_status.png";
     $icons = [
         "available" => "../assets/image/available.png",
         "consultation_hours" => "../assets/image/consulting_hours.png",
@@ -46,7 +46,7 @@ function statusIconPath($status)
         "in_meeting" => "../assets/image/meeting.png",
         "out_of_campus" => "../assets/image/out_of_campus.png",
     ];
-    return $icons[$status] ?? "../assets/image/no_status.png";
+    return $icons[$status] ?? "../assets/image/available.png";
 }
 
 $search = $_GET["search"] ?? "";
