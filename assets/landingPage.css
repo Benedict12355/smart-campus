@@ -1,0 +1,53 @@
+body.landing {
+    position: relative;
+    min-height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: radial-gradient(circle at 20% 0%, #3d1f0b 0%, #271208 45%, #0f0704 100%);
+    background-attachment: fixed;
+}
+
+/* School photo layered faintly on top of the gradient */
+body.landing::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('image/school.jpg') center center / cover no-repeat;
+    opacity: 0.15;
+    z-index: 0;
+}
+
+body.landing > * {
+    position: relative;
+    z-index: 1;
+}
+
+.landing-subtitle {
+    color: #edeae7;
+}
+
+.landing-login-link {
+    color: #f2f0ee;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.landing-login-link:hover {
+    color: #ffd0a3;
+}
+
+.landing-title {
+    color: #ff8c3d;
+    font-weight: 700;
+}
+
+.btn-primary {
+    background: linear-gradient(90deg, #0a3d91, #1a5bb8);
+    border: none;
+}
+.btn-primary:hover {
+    background: linear-gradient(90deg, #072c6b, #134890);
+}
