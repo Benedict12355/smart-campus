@@ -22,7 +22,17 @@ function statusClass($status) {
     ];
     return $classes[$status] ?? "status-away";
 }
-
+function statusIconPath($status) {
+    $icons = [
+        "available" => "../assets/image/available.png",
+        "consultation_hours" => "../assets/image/consulting_hours.png",
+        "in_class" => "../assets/image/in_class.png",
+        "busy" => "../assets/image/unavailable.png",
+        "in_meeting" => "../assets/image/meeting.png",
+        "out_of_campus" => "../assets/image/out_of_campus.png",
+    ];
+    return $icons[$status] ?? "../assets/icons/available.png";
+}
 
 $search = $_GET["search"] ?? "";
 $sort = $_GET["sort"] ?? "id";
@@ -68,12 +78,17 @@ $people = $stmt->fetchAll();
 <div class="card-grid">
 <?php foreach ($people as $person): ?>
     <div class="card <?= statusClass($person["status"]) ?>">
-        <h2><?= htmlspecialchars($person["full_name"]) ?></h2>
-        <p class="meta"><?= htmlspecialchars($person["role_title"]) ?> &middot; <?= htmlspecialchars($person["department"]) ?></p>
-        <p class="status-badge"><?= statusLabel($person["status"]) ?></p>
-        <?php if ($person["location"]): ?>
-            <p class="location">📍 <?= htmlspecialchars($person["location"]) ?></p>
-        <?php endif; ?>
+        <div class="status-icon">
+            <img src="<?= statusIconPath($person["status"]) ?>" alt="<?= statusLabel($person["status"]) ?>">
+        </div>
+        <div class="card-body">
+            <h2><?= htmlspecialchars($person["full_name"]) ?></h2>
+            <p class="meta"><?= htmlspecialchars($person["role_title"]) ?> &middot; <?= htmlspecialchars($person["department"]) ?></p>
+            <p class="status-badge"><?= statusLabel($person["status"]) ?></p>
+            <?php if ($person["location"]): ?>
+                <p class="location">📍 <?= htmlspecialchars($person["location"]) ?></p>
+            <?php endif; ?>
+        </div>
     </div>
 <?php endforeach; ?>
 
