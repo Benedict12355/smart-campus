@@ -5,6 +5,7 @@ body {
     padding: 30px;
 }
 
+
 h1 {
     text-align: center;
 }
@@ -18,7 +19,7 @@ form {
 
 form input {
     padding: 10px;
-    width: 280px;
+    width: 350px;
     font-size: 1rem;
     border: 1px solid #ccc;
     border-radius: 6px;
@@ -119,3 +120,47 @@ form button {
 .status-away { border-left-color: #888; }
 .status-away .status-badge { color: #888; }
 .status-away .status-icon { background: #eee; }
+
+.status-icon {
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: #f2f2f2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.status-icon img {
+    width: 26px;
+    height: 26px;
+    object-fit: contain;
+}
+
+.status-available .status-icon { background: #e6f7e9; }
+.status-busy .status-icon { background: #fdf0e2; }
+.status-away .status-icon { background: #eee; }
+
+.fade-card {
+    opacity: 0;
+    transform: translateY(15px);
+    animation: fadeInUp 0.5s ease forwards;
+    animation-delay: var(--delay, 0s);
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1) !important;
+}
