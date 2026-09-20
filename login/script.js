@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', () => {
 
     // View Elements
@@ -61,8 +60,8 @@ document.addEventListener('DOMContentLoaded', () => {
     linkToSignin.addEventListener('click', (e) => {
 
         e.preventDefault();
-        switchToSignIn();
 
+        switchToSignIn();
     });
 
 
@@ -70,8 +69,8 @@ document.addEventListener('DOMContentLoaded', () => {
     linkToSignup.addEventListener('click', (e) => {
 
         e.preventDefault();
-        switchToSignUp();
 
+        switchToSignUp();
     });
 
 
@@ -90,7 +89,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             toastIcon.className =
                 'fa-solid fa-circle-exclamation text-red-500 text-xl';
-
         }
 
         toast.classList.add('show');
@@ -107,8 +105,8 @@ document.addEventListener('DOMContentLoaded', () => {
     openTermsModal.addEventListener('click', (e) => {
 
         e.preventDefault();
-        termsModal.classList.add('active');
 
+        termsModal.classList.add('active');
     });
 
 
@@ -116,7 +114,6 @@ document.addEventListener('DOMContentLoaded', () => {
     closeTermsModal.addEventListener('click', () => {
 
         termsModal.classList.remove('active');
-
     });
 
 
@@ -126,9 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.target === termsModal) {
 
             termsModal.classList.remove('active');
-
         }
-
     });
 
 
@@ -146,11 +141,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (group) {
 
                 group.classList.remove('error');
-
             }
-
         });
-
     });
 
 
@@ -281,9 +273,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 'Please correct the highlighted fields.',
                 false
             );
-
         }
-
     });
 
 
@@ -357,14 +347,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 'Please fill in all required credentials.',
                 false
             );
-
         }
-
     });
 
 
     // Social Login Buttons
-    document.querySelectorAll('.social-btn')
+    document
+        .querySelectorAll('.social-btn')
         .forEach(btn => {
 
             btn.addEventListener('click', () => {
@@ -380,10 +369,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     'Social Login',
                     `Initiating authentication via ${provider}...`
                 );
-
             });
-
         });
 
 });
-

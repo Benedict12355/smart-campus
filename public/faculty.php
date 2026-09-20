@@ -78,7 +78,7 @@ $people = $stmt->fetchAll();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Faculty & Staff Availability</title>
     <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../assets/publicstyle.css">
+    <link rel="stylesheet" href="../assets/style/publicstyle.css">
 </head>
 
 <body>
@@ -145,7 +145,7 @@ $people = $stmt->fetchAll();
     </div>
 
     <script src="../assets/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="../assets/kiosk.js"></script>
+    <script src="../assets/public.js"></script>
 </body>
 
 </html>
