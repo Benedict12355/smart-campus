@@ -178,6 +178,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 .classList.add('error');
 
             isValid = false;
+            if (!isValid) {
+        e.preventDefault(); // Stop form submission only if validation fails
+        showToast('Validation Error', 'Please correct the highlighted fields.', false);
+    }
         }
 
 
@@ -232,48 +236,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Successful Validation
         if (isValid) {
+    const formData = new FormData();
+    formData.append('registration', '1');
+    formData.append('fullname', nameVal);
+    formData.append('email', emailVal);
+    formData.append('pswd', passVal);
 
-            const btn =
-                document.getElementById('btnRegister');
-
-            const originalText =
-                btn.innerHTML;
-
-            btn.disabled = true;
-
-            btn.innerHTML =
-                `<i class="fa-solid fa-spinner fa-spin"></i>
-                 <span>Registering...</span>`;
-
-
-            setTimeout(() => {
-
-                btn.disabled = false;
-
-                btn.innerHTML = originalText;
-
-                showToast(
-                    'Registration Successful!',
-                    'Welcome aboard! Redirecting to dashboard...'
-                );
-
-                signupForm.reset();
-
-                setTimeout(
-                    switchToSignIn,
-                    1500
-                );
-
-            }, 1200);
-
-        } else {
-
-            showToast(
-                'Validation Error',
-                'Please correct the highlighted fields.',
-                false
-            );
-        }
+    fetch('process.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.text())
+    .then(data => {
+        showToast('Registration Successful!', 'Welcome aboard!');
+        signupForm.reset();
+        setTimeout(switchToSignIn, 1500);
+    })
+    .catch(err => {
+        showToast('Error', 'Server connection failed.', false);
+    });
+}
     });
 
 

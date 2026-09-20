@@ -16,7 +16,7 @@
         Check Faculty Availability
     </a>
 
-    <a href="../admin/login.php" class="landing-login-link">
+    <a href="../login/index.php" class="landing-login-link">
         Staff Login
     </a>
 </div>

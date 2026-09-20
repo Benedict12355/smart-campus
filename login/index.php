@@ -19,64 +19,39 @@
              id="signupView">
             <div class="form-column">
                 <h2 class="form-title">Sign up</h2>
-                <form id="signupForm" novalidate>
-                    <div class="input-group"
-                         id="group-signup-name">
-                        <i class="fa-solid fa-user input-icon"></i>
-                        <input type="text"
-                               id="signupName"
-                               class="custom-input"
-                               placeholder="Your Name"
-                               autocomplete="name">
-                        <span class="error-text">
-                            Please enter your name
-                        </span>
 
-                    </div>
-                    <div class="input-group"
-                         id="group-signup-email">
-                        <i class="fa-solid fa-envelope input-icon"></i>
-                        <input type="email"
-                               id="signupEmail"
-                               class="custom-input"
-                               placeholder="Your Email"
-                               autocomplete="email">
-                        <span class="error-text">Valid email is required</span>
-                    </div>
-                    <div class="input-group"
-                         id="group-signup-pass">
-                        <i class="fa-solid fa-lock input-icon"></i>
-                        <input type="password"
-                               id="signupPassword"
-                               class="custom-input"
-                               placeholder="Password"
-                               autocomplete="new-password">
-                        <span class="error-text">
-                            Min 6 characters required
-                        </span>
-                    </div>
-                    <div class="input-group"
-                         id="group-signup-repeat">
-                        <i class="fa-solid fa-lock input-icon"></i>
-                        <input type="password"
-                               id="signupRepeatPassword"
-                               class="custom-input"
-                               placeholder="Repeat your password"
-                               autocomplete="new-password">
-                        <span class="error-text">Passwords do not match</span>
-                    </div>
-                    <label class="checkbox-container">
-                        <input type="checkbox" id="signupTerms">
-                        <span class="checkmark"></span>  I agree all statements in
-                        <a href="#" class="terms-link" id="openTermsModal"> Terms of service  </a>
+                <form id="signupForm" action="process.php" method="POST" novalidate>
+    <div class="input-group" id="group-signup-name">
+        <i class="fa-solid fa-user input-icon"></i>
+        <input type="text" name="fullname" id="signupName" class="custom-input" placeholder="Your Name" required autocomplete="name">
+    </div>
 
-                    </label>
-                    <button type="submit"
-                            class="btn-submit"
-                            id="btnRegister">
-                        <span>  Register</span>
-                    </button>
-                </form>
+    <div class="input-group" id="group-signup-email">
+        <i class="fa-solid fa-envelope input-icon"></i>
+        <input type="email" name="email" id="signupEmail" class="custom-input" placeholder="Your Email" required autocomplete="email">
+    </div>
+
+    <div class="input-group" id="group-signup-pass">
+        <i class="fa-solid fa-lock input-icon"></i>
+        <input type="password" name="pswd" id="signupPassword" class="custom-input" placeholder="Password" required autocomplete="new-password">
+    </div>
+
+    <div class="input-group" id="group-signup-repeat">
+        <i class="fa-solid fa-lock input-icon"></i>
+        <input type="password" id="signupRepeatPassword" class="custom-input" placeholder="Repeat your password" autocomplete="new-password">
+    </div>
+
+    <label class="checkbox-container">
+        <input type="checkbox" id="signupTerms">
+        <span class="checkmark"></span> I agree all statements in
+        <a href="#" class="terms-link" id="openTermsModal"> Terms of service </a>
+    </label>
+
+    <button type="submit" name="registration" class="btn-submit" id="btnRegister">
+        <span>Register</span>
+    </button>
+</form>
+
             </div>
             <div class="illustration-column">
                 <div class="image-container">
@@ -99,33 +74,20 @@
                     <div class="input-group"
                          id="group-signin-name">
                         <i class="fa-solid fa-user input-icon"></i>
-                        <input type="text"
-                               id="signinName"
-                               class="custom-input"
-                               placeholder="Your Email"
-                               autocomplete="username">
+                        <input type="text" id="signinName" class="custom-input" placeholder="Your Email" autocomplete="username">
                         <span class="error-text"> Please enter your username  </span>
                     </div>
                     <div class="input-group" id="group-signin-pass">
                         <i class="fa-solid fa-lock input-icon"></i>
-                        <input type="password"
-                               id="signinPassword"
-                               class="custom-input"
-                               placeholder="Password"
-                               autocomplete="current-password">
+                        <input type="password" id="signinPassword"class="custom-input"  placeholder="Password"autocomplete="current-password">
                         <span class="error-text"> Password is required   </span>
                     </div>
                     <label class="checkbox-container">
-                        <input type="checkbox"
-                               id="signinRemember"
-                               checked>
+                        <input type="checkbox" id="signinRemember" checked>
                         <span class="checkmark"></span>Remember me
                     </label>
 
-                    <button type="submit"
-                            class="btn-submit"
-                            id="btnLogin">
-
+                    <button type="submit" class="btn-submit" id="btnLogin">
                         <span>Log in </span>
                     </button>
                 </form>
@@ -133,17 +95,10 @@
                     <span class="social-title">
                         Or login with
                     </span>
-                    <button type="button"
-                            class="social-btn facebook"
-                            title="Login with Facebook"
-                            aria-label="Facebook Login">
+                    <button type="button" class="social-btn facebook" title="Login with Facebook" aria-label="Facebook Login">
                         <i class="fa-brands fa-facebook-f"></i>
-
                     </button>
-                    <button type="button"
-                            class="social-btn twitter"
-                            title="Login with Twitter"
-                            aria-label="Twitter Login">
+                    <button type="button" class="social-btn twitter" title="Login with Twitter" aria-label="Twitter Login">
                         <i class="fa-brands fa-twitter"></i>
                     </button>
                     <button type="button"
@@ -189,6 +144,6 @@
             </div>
         </div>
     </div>
-    <script src="script.js"></script>
+    <!-- <script src="script.js"></script> -->
 </body>
 </html>

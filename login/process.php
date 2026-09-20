@@ -24,7 +24,7 @@ if (isset($_POST["registration"])) {
             $facultyId = $pdo->lastInsertId();
 
             // Step 2: create the login account, linked to that profile
-            $stmt = $pdo->prepare("INSERT INTO users (username, password_hash, role, faculty_staff_id) VALUES (:email, :password, 'faculty', :faculty_id)");
+            $stmt = $pdo->prepare("INSERT INTO users (email, password_hash, faculty_staff_id) VALUES (:email, :password, :faculty_id)");
             $stmt->execute([
                 "email" => $email,
                 "password" => $password,
@@ -46,7 +46,7 @@ if (isset($_POST["login"])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    $sql = "SELECT * FROM users WHERE username = :email";
+    $sql = "SELECT * FROM users WHERE email = :email";
     $stmt = $pdo->prepare($sql);
     $stmt->execute(['email' => $username]);
     $row = $stmt->fetch();
@@ -55,8 +55,7 @@ if (isset($_POST["login"])) {
 
         session_regenerate_id(true);
         $_SESSION['user_id'] = $row['id'];
-        $_SESSION['username'] = $row['username'];
-        $_SESSION['role'] = $row['role'];
+        $_SESSION['email'] = $row['email'];
         $_SESSION['faculty_staff_id'] = $row['faculty_staff_id'];
         $_SESSION['loggedin'] = true;
 
