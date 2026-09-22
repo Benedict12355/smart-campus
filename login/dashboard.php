@@ -112,7 +112,10 @@ $classes = $stmt->fetchAll();
                               : 'Never' ?>
                     </strong>
                 </div>
-                <button class="edit-btn">Edit Profile</button>
+                <a href="edit_profile.php" class="edit-profile-btn">
+    <i class="fa-solid fa-user-pen"></i>
+    Edit Profile
+</a>
             </div>
         </div>
     </div>
