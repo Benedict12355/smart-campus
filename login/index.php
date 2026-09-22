@@ -33,7 +33,7 @@
 
     <div class="input-group" id="group-signup-pass">
         <i class="fa-solid fa-lock input-icon"></i>
-        <input type="password" name="pswd" id="signupPassword" class="custom-input" placeholder="Password" required autocomplete="new-password">
+        <input type="password" name="pswd" id="signupPassword" class="custom-input" placeholder="Password" required autocomplete="off">
     </div>
 
     <div class="input-group" id="group-signup-repeat">
@@ -71,17 +71,16 @@
             <div class="form-column">
                 <h2 class="form-title">Sign in</h2>
                 <form id="signinForm" novalidate>
-                    <div class="input-group"
-                         id="group-signin-name">
-                        <i class="fa-solid fa-user input-icon"></i>
-                        <input type="text" id="signinName" class="custom-input" placeholder="Your Email" autocomplete="username">
-                        <span class="error-text"> Please enter your username  </span>
-                    </div>
-                    <div class="input-group" id="group-signin-pass">
-                        <i class="fa-solid fa-lock input-icon"></i>
-                        <input type="password" id="signinPassword"class="custom-input"  placeholder="Password"autocomplete="current-password">
-                        <span class="error-text"> Password is required   </span>
-                    </div>
+    <div class="input-group" id="group-signin-name">
+        <i class="fa-solid fa-user input-icon"></i>
+        <input type="text" name="username" id="signinName" class="custom-input" placeholder="Your Email" autocomplete="username">
+        <span class="error-text">Please enter your email</span>
+    </div>
+    <div class="input-group" id="group-signin-pass">
+        <i class="fa-solid fa-lock input-icon"></i>
+        <input type="password" name="password" id="signinPassword" class="custom-input" placeholder="Password" autocomplete="current-password">
+        <span class="error-text">Password is required</span>
+    </div>
                     <label class="checkbox-container">
                         <input type="checkbox" id="signinRemember" checked>
                         <span class="checkmark"></span>Remember me
@@ -144,6 +143,6 @@
             </div>
         </div>
     </div>
-    <!-- <script src="script.js"></script> -->
+    <script src="script.js"></script>
 </body>
 </html>

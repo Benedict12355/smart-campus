@@ -1,5 +1,5 @@
 <?php
-require 'db_con.php';
+require '../config/db.php';
 
 function checkEmailIfExist($email, $pdo)
 {

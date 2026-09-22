@@ -62,6 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
 
         switchToSignIn();
+
     });
 
 
@@ -71,6 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
 
         switchToSignUp();
+
     });
 
 
@@ -89,6 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             toastIcon.className =
                 'fa-solid fa-circle-exclamation text-red-500 text-xl';
+
         }
 
         toast.classList.add('show');
@@ -107,6 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
 
         termsModal.classList.add('active');
+
     });
 
 
@@ -114,6 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
     closeTermsModal.addEventListener('click', () => {
 
         termsModal.classList.remove('active');
+
     });
 
 
@@ -123,7 +128,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.target === termsModal) {
 
             termsModal.classList.remove('active');
+
         }
+
     });
 
 
@@ -141,8 +148,11 @@ document.addEventListener('DOMContentLoaded', () => {
             if (group) {
 
                 group.classList.remove('error');
+
             }
+
         });
+
     });
 
 
@@ -178,10 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 .classList.add('error');
 
             isValid = false;
-            if (!isValid) {
-        e.preventDefault(); // Stop form submission only if validation fails
-        showToast('Validation Error', 'Please correct the highlighted fields.', false);
-    }
+
         }
 
 
@@ -196,6 +203,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 .classList.add('error');
 
             isValid = false;
+
         }
 
 
@@ -207,6 +215,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 .classList.add('error');
 
             isValid = false;
+
         }
 
 
@@ -218,6 +227,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 .classList.add('error');
 
             isValid = false;
+
+        }
+
+
+        // Validation Error
+        if (!isValid) {
+
+            showToast(
+                'Validation Error',
+                'Please correct the highlighted fields.',
+                false
+            );
+
+            return;
+
         }
 
 
@@ -231,31 +255,65 @@ document.addEventListener('DOMContentLoaded', () => {
             );
 
             return;
+
         }
 
 
         // Successful Validation
-        if (isValid) {
-    const formData = new FormData();
-    formData.append('registration', '1');
-    formData.append('fullname', nameVal);
-    formData.append('email', emailVal);
-    formData.append('pswd', passVal);
+        const formData = new FormData();
 
-    fetch('process.php', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => response.text())
-    .then(data => {
-        showToast('Registration Successful!', 'Welcome aboard!');
-        signupForm.reset();
-        setTimeout(switchToSignIn, 1500);
-    })
-    .catch(err => {
-        showToast('Error', 'Server connection failed.', false);
-    });
-}
+        formData.append('registration', '1');
+        formData.append('fullname', nameVal);
+        formData.append('email', emailVal);
+        formData.append('pswd', passVal);
+
+
+        fetch('process.php', {
+            method: 'POST',
+            body: formData
+        })
+
+        .then(response => response.text())
+
+        .then(data => {
+
+            if (data.trim() === 'success') {
+
+                showToast(
+                    'Registration Successful!',
+                    'Welcome aboard!'
+                );
+
+                signupForm.reset();
+
+                setTimeout(() => {
+
+                    switchToSignIn();
+
+                }, 1500);
+
+            } else {
+
+                showToast(
+                    'Registration Failed',
+                    data.trim() || 'Unable to create your account.',
+                    false
+                );
+
+            }
+
+        })
+
+        .catch(err => {
+
+            showToast(
+                'Error',
+                'Server connection failed.',
+                false
+            );
+
+        });
+
     });
 
 
@@ -274,6 +332,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let isValid = true;
 
 
+        // Username / Email
         if (!nameVal) {
 
             document
@@ -281,9 +340,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 .classList.add('error');
 
             isValid = false;
+
         }
 
 
+        // Password
         if (!passVal) {
 
             document
@@ -291,45 +352,98 @@ document.addEventListener('DOMContentLoaded', () => {
                 .classList.add('error');
 
             isValid = false;
+
         }
 
 
-        if (isValid) {
+        // Validation Error
+        if (!isValid) {
 
-            const btn =
-                document.getElementById('btnLogin');
+            showToast(
+                'Validation Error',
+                'Please enter your login details.',
+                false
+            );
 
-            const originalText =
-                btn.innerHTML;
+            return;
 
-            btn.disabled = true;
-
-            btn.innerHTML =
-                `<i class="fa-solid fa-spinner fa-spin"></i>
-                 <span>Authenticating...</span>`;
+        }
 
 
-            setTimeout(() => {
+        // Login Button
+        const btn =
+            document.getElementById('btnLogin');
+
+        const originalText =
+            btn.innerHTML;
+
+        btn.disabled = true;
+
+        btn.innerHTML =
+            `<i class="fa-solid fa-spinner fa-spin"></i> <span>Authenticating...</span>`;
+
+
+        // Login Data
+        const formData = new FormData();
+
+        formData.append('login', '1');
+        formData.append('username', nameVal);
+        formData.append('password', passVal);
+
+
+        // Send Login Request
+        fetch('process.php', {
+            method: 'POST',
+            body: formData
+        })
+
+        .then(response => response.text())
+
+        .then(data => {
+
+            if (data.trim() === 'success') {
+
+                showToast(
+                    'Welcome back!',
+                    'Redirecting to your dashboard...'
+                );
+
+                setTimeout(() => {
+
+                    window.location.href = 'dashboard.php';
+
+                }, 800);
+
+            } else {
 
                 btn.disabled = false;
 
                 btn.innerHTML = originalText;
 
                 showToast(
-                    'Welcome back!',
-                    `Logged in successfully as ${nameVal}.`
+                    'Login Failed',
+                    'Invalid email or password.',
+                    false
                 );
 
-            }, 1200);
+            }
 
-        } else {
+        })
+
+        .catch(err => {
+
+            btn.disabled = false;
+
+            btn.innerHTML = originalText;
 
             showToast(
-                'Login Failed',
-                'Please fill in all required credentials.',
+                'Error',
+                'Server connection failed.',
                 false
             );
-        }
+
+        });
+
     });
 
 
@@ -347,11 +461,14 @@ document.addEventListener('DOMContentLoaded', () => {
                             ? 'Twitter'
                             : 'Google';
 
+
                 showToast(
                     'Social Login',
                     `Initiating authentication via ${provider}...`
                 );
+
             });
+
         });
 
 });
