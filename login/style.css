@@ -1,21 +1,20 @@
-
 :root {
-    --neon-green: #00ff88;
-    --neon-blue: #0099ff;
-    --neon-pink: #ff0080;
+    --neon-green: #8b5cf6;   /* was green, now matches dashboard purple accent */
+    --neon-blue: #a78bfa;    /* was blue, now the lighter purple used for text/links */
+    --neon-pink: #f87171;    /* was pink, now matches your "error/logout" red */
 
-    --bg-dark: #080a0f;
-    --card-bg: #11141c;
-    --input-bg: #171b25;
+    --bg-dark: #080712;      /* matches dashboard body background exactly */
+    --card-bg: #11101c;      /* matches dashboard .panel background */
+    --input-bg: #0c0b16;     /* matches dashboard input/select background */
 
-    --border-dark: #292f3a;
+    --border-dark: #33285c;  /* matches dashboard .panel border */
     --text-white: #ffffff;
-    --text-light: #a0a8b8;
-    --text-muted: #707887;
+    --text-light: #c4b5fd;   /* matches dashboard label color */
+    --text-muted: #8b92ab;   /* matches dashboard muted text */
 
     --shadow-dark: rgba(0, 0, 0, 0.5);
-    --green-glow: rgba(0, 255, 136, 0.25);
-    --blue-glow: rgba(0, 153, 255, 0.2);
+    --green-glow: rgba(139, 92, 246, 0.25);
+    --blue-glow: rgba(167, 139, 250, 0.2);
 }
 
 
