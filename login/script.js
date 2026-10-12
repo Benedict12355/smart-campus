@@ -1,474 +1,145 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // View Elements
     const signupView = document.getElementById('signupView');
     const signinView = document.getElementById('signinView');
-
     const linkToSignin = document.getElementById('linkToSignin');
     const linkToSignup = document.getElementById('linkToSignup');
-
-
-    // Forms
     const signupForm = document.getElementById('signupForm');
     const signinForm = document.getElementById('signinForm');
-
-
-    // Toast Elements
     const toast = document.getElementById('toast');
     const toastTitle = document.getElementById('toastTitle');
     const toastMessage = document.getElementById('toastMessage');
     const toastIcon = document.getElementById('toastIcon');
-
-
-    // Terms Modal
     const termsModal = document.getElementById('termsModal');
     const openTermsModal = document.getElementById('openTermsModal');
     const closeTermsModal = document.getElementById('closeTermsModal');
 
-
-    // Switch to Sign In
     function switchToSignIn() {
-
         signupView.classList.remove('active-panel');
         signupView.classList.add('hidden-panel');
-
         setTimeout(() => {
-
             signinView.classList.remove('hidden-panel');
             signinView.classList.add('active-panel');
-
         }, 150);
     }
 
-
-    // Switch to Sign Up
     function switchToSignUp() {
-
         signinView.classList.remove('active-panel');
         signinView.classList.add('hidden-panel');
-
         setTimeout(() => {
-
             signupView.classList.remove('hidden-panel');
             signupView.classList.add('active-panel');
-
         }, 150);
     }
 
+    linkToSignin.addEventListener('click', (e) => { e.preventDefault(); switchToSignIn(); });
+    linkToSignup.addEventListener('click', (e) => { e.preventDefault(); switchToSignUp(); });
 
-    // Sign In Link
-    linkToSignin.addEventListener('click', (e) => {
-
-        e.preventDefault();
-
-        switchToSignIn();
-
-    });
-
-
-    // Sign Up Link
-    linkToSignup.addEventListener('click', (e) => {
-
-        e.preventDefault();
-
-        switchToSignUp();
-
-    });
-
-
-    // Toast Function
     function showToast(title, message, isSuccess = true) {
-
         toastTitle.innerText = title;
         toastMessage.innerText = message;
-
-        if (isSuccess) {
-
-            toastIcon.className =
-                'fa-solid fa-circle-check text-green-500 text-xl';
-
-        } else {
-
-            toastIcon.className =
-                'fa-solid fa-circle-exclamation text-red-500 text-xl';
-
-        }
-
+        toastIcon.className = isSuccess
+            ? 'fa-solid fa-circle-check text-green-500 text-xl'
+            : 'fa-solid fa-circle-exclamation text-red-500 text-xl';
         toast.classList.add('show');
-
-        setTimeout(() => {
-
-            toast.classList.remove('show');
-
-        }, 3500);
+        setTimeout(() => { toast.classList.remove('show'); }, 3500);
     }
 
+    openTermsModal.addEventListener('click', (e) => { e.preventDefault(); termsModal.classList.add('active'); });
+    closeTermsModal.addEventListener('click', () => { termsModal.classList.remove('active'); });
+    termsModal.addEventListener('click', (e) => { if (e.target === termsModal) termsModal.classList.remove('active'); });
 
-    // Open Terms Modal
-    openTermsModal.addEventListener('click', (e) => {
-
-        e.preventDefault();
-
-        termsModal.classList.add('active');
-
-    });
-
-
-    // Close Terms Modal
-    closeTermsModal.addEventListener('click', () => {
-
-        termsModal.classList.remove('active');
-
-    });
-
-
-    // Close Modal when clicking outside
-    termsModal.addEventListener('click', (e) => {
-
-        if (e.target === termsModal) {
-
-            termsModal.classList.remove('active');
-
-        }
-
-    });
-
-
-    // Remove Error when Typing
-    const allInputs =
-        document.querySelectorAll('.custom-input');
-
-    allInputs.forEach(input => {
-
+    document.querySelectorAll('.custom-input').forEach(input => {
         input.addEventListener('input', () => {
-
-            const group =
-                input.closest('.input-group');
-
-            if (group) {
-
-                group.classList.remove('error');
-
-            }
-
+            const group = input.closest('.input-group');
+            if (group) group.classList.remove('error');
         });
-
     });
 
-
-    // Sign Up Validation
     signupForm.addEventListener('submit', (e) => {
-
         e.preventDefault();
-
-        const nameVal =
-            document.getElementById('signupName').value.trim();
-
-        const emailVal =
-            document.getElementById('signupEmail').value.trim();
-
-        const passVal =
-            document.getElementById('signupPassword').value;
-
-        const repeatPassVal =
-            document.getElementById('signupRepeatPassword').value;
-
-        const termsChecked =
-            document.getElementById('signupTerms').checked;
-
+        const nameVal = document.getElementById('signupName').value.trim();
+        const emailVal = document.getElementById('signupEmail').value.trim();
+        const passVal = document.getElementById('signupPassword').value;
+        const repeatPassVal = document.getElementById('signupRepeatPassword').value;
+        const termsChecked = document.getElementById('signupTerms').checked;
 
         let isValid = true;
+        if (!nameVal) { document.getElementById('group-signup-name').classList.add('error'); isValid = false; }
 
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailVal || !emailRegex.test(emailVal)) { document.getElementById('group-signup-email').classList.add('error'); isValid = false; }
 
-        // Name
-        if (!nameVal) {
+        if (!passVal || passVal.length < 6) { document.getElementById('group-signup-pass').classList.add('error'); isValid = false; }
+        if (passVal !== repeatPassVal || !repeatPassVal) { document.getElementById('group-signup-repeat').classList.add('error'); isValid = false; }
 
-            document
-                .getElementById('group-signup-name')
-                .classList.add('error');
+        if (!isValid) { showToast('Validation Error', 'Please correct the highlighted fields.', false); return; }
+        if (!termsChecked) { showToast('Terms Required', 'Please accept the Terms of service to proceed.', false); return; }
 
-            isValid = false;
-
-        }
-
-
-        // Email
-        const emailRegex =
-            /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-        if (!emailVal || !emailRegex.test(emailVal)) {
-
-            document
-                .getElementById('group-signup-email')
-                .classList.add('error');
-
-            isValid = false;
-
-        }
-
-
-        // Password
-        if (!passVal || passVal.length < 6) {
-
-            document
-                .getElementById('group-signup-pass')
-                .classList.add('error');
-
-            isValid = false;
-
-        }
-
-
-        // Repeat Password
-        if (passVal !== repeatPassVal || !repeatPassVal) {
-
-            document
-                .getElementById('group-signup-repeat')
-                .classList.add('error');
-
-            isValid = false;
-
-        }
-
-
-        // Validation Error
-        if (!isValid) {
-
-            showToast(
-                'Validation Error',
-                'Please correct the highlighted fields.',
-                false
-            );
-
-            return;
-
-        }
-
-
-        // Terms
-        if (!termsChecked) {
-
-            showToast(
-                'Terms Required',
-                'Please accept the Terms of service to proceed.',
-                false
-            );
-
-            return;
-
-        }
-
-
-        // Successful Validation
         const formData = new FormData();
-
         formData.append('registration', '1');
         formData.append('fullname', nameVal);
         formData.append('email', emailVal);
         formData.append('pswd', passVal);
 
-
-        fetch('process.php', {
-            method: 'POST',
-            body: formData
-        })
-
-        .then(response => response.text())
-
-        .then(data => {
-
-            if (data.trim() === 'success') {
-
-                showToast(
-                    'Registration Successful!',
-                    'Welcome aboard!'
-                );
-
-                signupForm.reset();
-
-                setTimeout(() => {
-
-                    switchToSignIn();
-
-                }, 1500);
-
-            } else {
-
-                showToast(
-                    'Registration Failed',
-                    data.trim() || 'Unable to create your account.',
-                    false
-                );
-
-            }
-
-        })
-
-        .catch(err => {
-
-            showToast(
-                'Error',
-                'Server connection failed.',
-                false
-            );
-
-        });
-
+        fetch('process.php', { method: 'POST', body: formData })
+            .then(r => r.text())
+            .then(data => {
+                if (data.trim() === 'success') {
+                    showToast('Registration Successful!', 'Welcome aboard!');
+                    signupForm.reset();
+                    setTimeout(switchToSignIn, 1500);
+                } else {
+                    showToast('Registration Failed', data.trim() || 'Unable to create your account.', false);
+                }
+            })
+            .catch(() => showToast('Error', 'Server connection failed.', false));
     });
 
-
-    // Sign In Validation
     signinForm.addEventListener('submit', (e) => {
-
         e.preventDefault();
-
-        const nameVal =
-            document.getElementById('signinName').value.trim();
-
-        const passVal =
-            document.getElementById('signinPassword').value;
-
+        const nameVal = document.getElementById('signinName').value.trim();
+        const passVal = document.getElementById('signinPassword').value;
 
         let isValid = true;
+        if (!nameVal) { document.getElementById('group-signin-name').classList.add('error'); isValid = false; }
+        if (!passVal) { document.getElementById('group-signin-pass').classList.add('error'); isValid = false; }
+        if (!isValid) { showToast('Validation Error', 'Please enter your login details.', false); return; }
 
-
-        // Username / Email
-        if (!nameVal) {
-
-            document
-                .getElementById('group-signin-name')
-                .classList.add('error');
-
-            isValid = false;
-
-        }
-
-
-        // Password
-        if (!passVal) {
-
-            document
-                .getElementById('group-signin-pass')
-                .classList.add('error');
-
-            isValid = false;
-
-        }
-
-
-        // Validation Error
-        if (!isValid) {
-
-            showToast(
-                'Validation Error',
-                'Please enter your login details.',
-                false
-            );
-
-            return;
-
-        }
-
-
-        // Login Button
-        const btn =
-            document.getElementById('btnLogin');
-
-        const originalText =
-            btn.innerHTML;
-
+        const btn = document.getElementById('btnLogin');
+        const originalText = btn.innerHTML;
         btn.disabled = true;
+        btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> <span>Authenticating...</span>`;
 
-        btn.innerHTML =
-            `<i class="fa-solid fa-spinner fa-spin"></i> <span>Authenticating...</span>`;
-
-
-        // Login Data
         const formData = new FormData();
-
         formData.append('login', '1');
         formData.append('username', nameVal);
         formData.append('password', passVal);
 
-
-        // Send Login Request
-        fetch('process.php', {
-            method: 'POST',
-            body: formData
-        })
-
-        .then(response => response.text())
-
-        .then(data => {
-
-            if (data.trim() === 'success') {
-
-                showToast(
-                    'Welcome back!',
-                    'Redirecting to your dashboard...'
-                );
-
-                setTimeout(() => {
-
-                    window.location.href = 'dashboard.php';
-
-                }, 800);
-
-            } else {
-
+        fetch('process.php', { method: 'POST', body: formData })
+            .then(r => r.text())
+            .then(data => {
+                if (data.trim() === 'success') {
+                    showToast('Welcome back!', 'Redirecting to your dashboard...');
+                    setTimeout(() => { window.location.href = 'dashboard.php'; }, 800);
+                } else {
+                    btn.disabled = false;
+                    btn.innerHTML = originalText;
+                    showToast('Login Failed', data.trim() || 'Invalid email or password.', false);
+                }
+            })
+            .catch(() => {
                 btn.disabled = false;
-
                 btn.innerHTML = originalText;
-
-                showToast(
-                    'Login Failed',
-                    'Invalid email or password.',
-                    false
-                );
-
-            }
-
-        })
-
-        .catch(err => {
-
-            btn.disabled = false;
-
-            btn.innerHTML = originalText;
-
-            showToast(
-                'Error',
-                'Server connection failed.',
-                false
-            );
-
-        });
-
+                showToast('Error', 'Server connection failed.', false);
+            });
     });
 
-
-    // Social Login Buttons
-    document
-        .querySelectorAll('.social-btn')
-        .forEach(btn => {
-
-            btn.addEventListener('click', () => {
-
-                const provider =
-                    btn.classList.contains('facebook')
-                        ? 'Facebook'
-                        : btn.classList.contains('twitter')
-                            ? 'Twitter'
-                            : 'Google';
-
-
-                showToast(
-                    'Social Login',
-                    `Initiating authentication via ${provider}...`
-                );
-
-            });
-
+    document.querySelectorAll('.social-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const provider = btn.classList.contains('facebook') ? 'Facebook'
+                          : btn.classList.contains('twitter')  ? 'Twitter' : 'Google';
+            showToast('Social Login', `Initiating authentication via ${provider}...`);
         });
-
+    });
 });

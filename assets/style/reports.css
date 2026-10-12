@@ -1,0 +1,38 @@
+.pdf-btn { background: linear-gradient(135deg, #7c3aed, #8b5cf6); color: #fff; border: none; padding: 10px 20px; border-radius: 8px; font-size: 0.9rem; font-weight: 600; cursor: pointer; box-shadow: 0 0 12px rgba(139, 92, 246, 0.25); transition: all 0.2s ease; }
+.pdf-btn:hover { transform: translateY(-1px); box-shadow: 0 0 20px rgba(139, 92, 246, 0.45); }
+.pdf-btn:disabled { opacity: 0.6; cursor: wait; transform: none; }
+
+.range-tabs { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+.range-tab { padding: 8px 16px; border-radius: 8px; background: #11101c; border: 1px solid #33285c; color: #c4b5fd; text-decoration: none; font-size: 0.85rem; transition: all 0.2s ease; }
+.range-tab:hover { background: #1a1730; color: #fff; }
+.range-tab.active { background: rgba(139, 92, 246, 0.2); border-color: #8b5cf6; color: #fff; }
+
+.report-header { margin-bottom: 20px; }
+.report-header h2 { color: #c4b5fd; margin: 0 0 4px; font-size: 1.2rem; }
+.report-generated { color: #8b92ab; font-size: 0.8rem; margin: 0; }
+
+.report-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin-bottom: 20px; }
+.report-stat { background: #11101c; border: 1px solid #33285c; border-radius: 12px; padding: 16px 18px; }
+.report-stat-label { color: #8b92ab; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+.report-stat-value { color: #fff; font-size: 1.6rem; font-weight: 700; }
+.report-stat-value.small { font-size: 1.1rem; }
+
+.chart-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.chart-panel { padding: 20px; }
+.chart-panel h3 { margin-top: 0; }
+.chart-wrapper { position: relative; height: 280px; }
+.chart-wrapper.tall { height: 320px; }
+
+.report-table { width: 100%; border-collapse: collapse; color: #e5e7eb; font-size: 0.9rem; }
+.report-table th, .report-table td { padding: 10px 12px; text-align: left; border-bottom: 1px solid #231a3d; }
+.report-table th { color: #c4b5fd; font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; }
+.report-table tr:last-child td { border-bottom: none; }
+
+.empty-state h3 { color: #c4b5fd; }
+.empty-state p { color: #8b92ab; line-height: 1.6; }
+.empty-state code { background: #080712; padding: 2px 6px; border-radius: 4px; color: #a78bfa; font-size: 0.85rem; }
+
+@media (max-width: 800px) {
+    .chart-grid { grid-template-columns: 1fr; }
+    .topbar { flex-direction: column; align-items: flex-start; gap: 12px; }
+}
